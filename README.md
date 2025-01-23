@@ -33,21 +33,21 @@ Follow these steps to set up and run the project locally.
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd <repository-name>
+  
    ```
 
-2. Navigate to the `backend` directory:
+2. Navigate to the `ecom` directory:
    ```bash
-   cd backend
+   cd <repository-name>
    ```
 
 3. Run the backend server using Docker:
    ```bash
-   docker build -t ecommerce-backend .
-   docker run -p 5000:5000 ecommerce-backend
+   npm install 
+   node index.js
    ```
 
-   The backend server will be available at `http://localhost:5000`.
+   The backend server will be available at `http://localhost:3000`.
 
 ### Frontend Setup
 
