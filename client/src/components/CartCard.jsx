@@ -5,6 +5,7 @@ import axios from "axios";
 import { animate, stagger } from "framer-motion";
 
 import { GET_PRODUCT_DETAIL_ROUTE } from "../utils/constants";
+import Count from "../animations/Count";
 
 const CartCard = ({ item }) => {
   const { cart, setCart } = useAppStore();
@@ -74,7 +75,6 @@ const CartCard = ({ item }) => {
     updateCart(newQuantity);
   };
 
-
   if (loading) return <Loader show={loading} />;
 
   return (
@@ -118,8 +118,11 @@ const CartCard = ({ item }) => {
           +
         </button>
       </div>
-      <p>{item.price}</p>
-      <p>{totalPrice}</p>
+      <p>
+        <Count end={item.price} time={2} />
+      </p>
+      <Count end={totalPrice} time={2} />
+
     </section>
   );
 };

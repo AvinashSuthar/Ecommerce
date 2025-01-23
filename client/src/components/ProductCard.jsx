@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import { useAppStore } from "../store";
 import { motion } from "framer-motion";
 
+import { stagger, animate } from "motion";
+
 export default function ProductCard(product) {
   const { cart, setCart } = useAppStore();
   const [added, setAdded] = useState(false);
@@ -62,7 +64,14 @@ export default function ProductCard(product) {
   };
 
   return (
-    <motion.div animate={{ y: 0 }} initial = {{y: 500}}  transition={ { type: "spring"  , damping: 5}}>
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.9,
+        scale: { type: "spring", visualDuration: 0.9, bounce: 0.4 },
+      }}
+    >
       <Card sx={{ maxWidth: 300, minHeight: 350 }} className="cursor-default">
         <Link
           to={`/product/${product.product._id} `}

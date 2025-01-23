@@ -8,10 +8,11 @@ import { Rating } from "@mui/material";
 import ReviewCard from "../components/ReviewCard";
 import MetaData from "../MetaData";
 import Loader from "../components/Loader";
+import { motion } from "framer-motion";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const {setCart , cart} = useAppStore();
+  const { setCart, cart } = useAppStore();
   const { curProduct, setCurProduct } = useAppStore();
   const [loading, setloading] = useState(true);
   const [addToCart, setAddToCart] = useState(1);
@@ -35,19 +36,21 @@ const ProductDetails = () => {
     const cartItem = {
       id: curProduct._id,
       name: curProduct.name,
-      price : curProduct.price,
-      image : curProduct.images[0].url,
+      price: curProduct.price,
+      image: curProduct.images[0].url,
       quantity: addToCart,
     };
-    const curCartItems = localStorage.getItem("cartItems") ?  JSON.parse(localStorage.getItem("cartItems")) : [];
+    const curCartItems = localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : [];
     let match = false;
     curCartItems.map((item) => {
       if (item.id === cartItem.id) {
-        item.quantity = cartItem.quantity
+        item.quantity = cartItem.quantity;
         match = true;
       }
     });
-    if(!match){
+    if (!match) {
       curCartItems.push(cartItem);
     }
     localStorage.setItem("cartItems", JSON.stringify(curCartItems));
@@ -59,7 +62,14 @@ const ProductDetails = () => {
   }
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.9,
+        scale: { type: "spring", visualDuration: 0.9, bounce: 0.1 },
+      }}
+    >
       <div className="lg:flex sm:block">
         <div className="lg:w-[50%]  m-1">
           <Carousel>
@@ -160,7 +170,7 @@ const ProductDetails = () => {
           </div>
         )}
       </div>
-    </>
+    </motion.div>
   );
 };
 

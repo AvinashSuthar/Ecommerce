@@ -5,6 +5,7 @@ import axios from "axios";
 import ProductCard from "../components/productCard";
 import Loader from "../components/Loader";
 
+
 const Home = () => {
   const { userInfo, product, setProduct, setUserInfo } = useAppStore();
 
