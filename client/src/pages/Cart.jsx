@@ -25,9 +25,7 @@ const Cart = () => {
             {cart.map((c) => (
               <CartCard key={c.id} item={c} />
             ))}
-            <div className="h-[300px]">
-
-            </div>
+            <div className="h-[300px]"></div>
             <div className="fixed bottom-0 bg-white border-t-2 flex items-center justify-between w-full px-3 ">
               <div className="m-3 flex justify-center text-2xl items-center">
                 <div> Gross Amount :</div>
@@ -52,7 +50,11 @@ const Cart = () => {
             </div>
           </div>
         ) : (
-          <div>No Products</div>
+          <div>
+            <div className="flex justify-center items-center h-[90vh]">
+              <img src="shopping (1).png" alt="No Products" />
+            </div>
+          </div>
         )}
       </div>
     </div>

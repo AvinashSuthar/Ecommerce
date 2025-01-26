@@ -2,20 +2,30 @@ import React, { useEffect, useState } from "react";
 import { useAppStore } from "../store";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { GET_PRODUCT_DETAIL_ROUTE } from "../utils/constants";
+import {
+  CREATE_REVIEW_ROUTE,
+  GET_PRODUCT_DETAIL_ROUTE,
+} from "../utils/constants";
 import Carousel from "react-material-ui-carousel";
 import { Rating } from "@mui/material";
 import ReviewCard from "../components/ReviewCard";
-import MetaData from "../MetaData";
-import Loader from "../components/Loader";
+import ProductDetailsSkeleton from "../components/skeleton/ProductDetailsSkeleton";
+import { toast } from "sonner";
 import { motion } from "framer-motion";
 
 const ProductDetails = () => {
-  const { id } = useParams();
   const { setCart, cart } = useAppStore();
+  const { id } = useParams();
   const { curProduct, setCurProduct } = useAppStore();
   const [loading, setloading] = useState(true);
   const [addToCart, setAddToCart] = useState(1);
+  const [refetch, setRefetch] = useState(true);
+
+  const [review, setReview] = useState({
+    productId: id,
+    rating: "",
+    comment: "",
+  });
 
   useEffect(() => {
     const getProductDetail = async () => {
@@ -31,7 +41,39 @@ const ProductDetails = () => {
       }
     };
     getProductDetail();
-  }, []);
+    setReview({
+      productId: id,
+      rating: "",
+      comment: "",
+    });
+  }, [refetch]);
+
+  const validateReview = () => {
+    if (review.comment.length < 1) {
+      toast.error("Enter Review Comment");
+      return false;
+    }
+    return true;
+  };
+  const handleSubmitReview = async () => {
+    if (validateReview()) {
+      try {
+        console.log(review);
+        const res = await axios.put(CREATE_REVIEW_ROUTE, review, {
+          withCredentials: true,
+        });
+        if (res.data) {
+          console.log(res.data);
+          toast.success("Review Created successfully");
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong!");
+      } finally {
+        setRefetch(!refetch);
+      }
+    }
+  };
   const handleAddToCart = () => {
     const cartItem = {
       id: curProduct._id,
@@ -55,19 +97,24 @@ const ProductDetails = () => {
     }
     localStorage.setItem("cartItems", JSON.stringify(curCartItems));
     setCart(curCartItems);
+    toast.success("Added to Cart");
   };
 
   if (loading) {
-    return <Loader show={loading} />;
+    return (
+      <div>
+        <ProductDetailsSkeleton />
+      </div>
+    );
   }
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, y: 1000 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{
-        duration: 0.9,
-        scale: { type: "spring", visualDuration: 0.9, bounce: 0.1 },
+        duration: 0.4,
+        scale: { type: "spring", visualDuration: 0.4, bounce: 0.1 },
       }}
     >
       <div className="lg:flex sm:block">
@@ -145,17 +192,52 @@ const ProductDetails = () => {
                 </button>
               </div>
             </div>
-            <div className="ms-3">
-              <button
-                type="button"
-                className="text-white  bg-red-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 hover:bg-red-700 transition-all divide-purple-300"
-              >
-                Submit A Review
-              </button>
-            </div>
           </div>
         </div>
       </div>
+
+      <div className="border-t-2 p-2">
+        <div>
+          <Rating
+            precision={0.1}
+            value={review.rating}
+            onChange={(e) => {
+              setReview({
+                ...review,
+                rating: e.target.value,
+              });
+            }}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            value={review.comment}
+            onChange={(e) =>
+              setReview({
+                ...review,
+                comment: e.target.value,
+              })
+            }
+            placeholder="Write your review"
+            className="border-none focus:ring-0 focus:outline-none hover:border-none"
+            style={{ width: "100%" }}
+          />
+        </div>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          whileDrag={{ scale: 0.9, rotate: 50 }}
+        >
+          <button
+            className="mt-5 p-1 px-3 text-sm mb-5 bg-red-500 text-white hover:bg-red-700 rounded transition-all duration-300"
+            onClick={handleSubmitReview}
+          >
+            Submit
+          </button>
+        </motion.button>
+      </div>
+
       <div className="border-t-2 pt-2">
         <p className="text-3xl font-semibold text-center">Reviews</p>
         {curProduct.reviews.length > 0 ? (
@@ -172,6 +254,10 @@ const ProductDetails = () => {
       </div>
     </motion.div>
   );
+};
+
+const ReviewForm = ({ setReview, review }) => {
+  return <div>helo</div>;
 };
 
 export default ProductDetails;

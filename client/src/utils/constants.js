@@ -19,3 +19,5 @@ export const GET_ALL_PRODUCT_ROUTE = `${AUTH_ROUTES}/products`;
 export const GET_PRODUCT_DETAIL_ROUTE = `${AUTH_ROUTES}/product`;
 
 export const LOGOUT_ROUTE = `${AUTH_ROUTES}/logout`;
+
+export const CREATE_REVIEW_ROUTE = `${AUTH_ROUTES}/review`;

@@ -37,33 +37,59 @@ const OrderInfo = () => {
     <>
       <div>
         <Checkout step={1} />
-        <div className="flex justify-evenly h-[70vh]">
-          <div className="border w-[60%] m-2 p-2">
-            <div>
-              <h2>Shipping Info</h2>
-              <p>Name : {userInfo.name}</p>
-              <p>Phone : {shippingInfo.phoneNo}</p>
-              <p>Address : {address}</p>
+        <div className="flex flex-col lg:flex-row md:flex-row xl:flex-row justify-evenly  items-center min-h-[700px] ">
+          <div className="  w-[60%] min-h-[600px] m-2 p-2">
+            <div className="mb-4">
+              <h2 className="text-xl font-semibold">Shipping Info</h2>
+              <div>
+                <div className="flex flex-row justify-between  w-[100%] px-4 py-2">
+                  <div>Name</div>
+                  <div>{userInfo.name}</div>
+                </div>
+                <div className="flex flex-row justify-between  w-[100%] px-4 py-2">
+                  <div>Phone</div>
+                  <div>{shippingInfo.phoneNo}</div>
+                </div>
+                <div className="flex flex-row justify-between  w-[100%] px-4 py-2">
+                  <div>Address</div>
+                  <div>{address}</div>
+                </div>
+              </div>
             </div>
-            <hr />
-            <div className="overflow-y-scroll h-[360px] border">
-              {cart.map((item) => (
-                <CartCard key={item.id} item={item} />
-              ))}
+            <div className="overflow-hidden mt-4 h-[460px] shadow-[rgba(0,_0,_0,_0.2)_0px_60px_40px_-7px] rounded-md relative">
+              <div className="animate-scroll h-full">
+                {cart.concat(cart).map((item, index) => (
+                  <CartCard key={`${item.id}-${index}`} item={item} />
+                ))}
+              </div>
             </div>
           </div>
-          <div className="border  w-[40%] m-2 p-2">
+          <div className=" w-[40%] m-2 p-2">
             <div className="flex flex-col justify-center items-start w-full h-full">
-              <h1>Order Summary</h1>
+              <h1 className="ms-3 text-xl text-gray-950 font-semibold border-b-2  w-full ">
+                Order Summary
+              </h1>
 
-              <div>
-                <p>Subtotal: {subTotal}</p>
-                <p>Shipping Charges: {shippingPrice}</p>
-                <p>GST: {tax}</p>
+              <div className="w-full">
+                <div className="flex flex-row justify-between  w-[100%] px-4 py-2">
+                  <div>Subtotal</div>
+                  <div>{subTotal}/-</div>
+                </div>
+                <div className="flex flex-row justify-between  w-[100%] px-4 py-2">
+                  <div>Shipping Charges</div>
+                  <div>{shippingPrice}/-</div>
+                </div>
+                <div className="flex flex-row justify-between  w-[100%] px-4 py-2">
+                  <div>GST</div>
+                  <div>{tax}/-</div>
+                </div>
               </div>
               <hr />
-              <div>
-                <p>Total: {totalPrice}</p>
+              <div className=" mt-4  border-t-2 w-full">
+                <div className="flex flex-row justify-between  w-[100%] px-4 py-2">
+                  <div>Total Price</div>
+                  <div>{totalPrice}/-</div>
+                </div>
               </div>
               <button
                 onClick={handlePayment}

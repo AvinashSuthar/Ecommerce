@@ -11,8 +11,10 @@ const Box = ({ children }) => {
         scale: { type: "spring", visualDuration: 0.7, bounce: 0.4 },
       }}
     >
-      <div className="flex items-center justify-center mt-[100px] h-[90vh] mb-10">
-        <div className="border rounded-xl p-10">{children}</div>
+      <div className="flex items-center justify-center  h-[90vh] mb-10">
+        <div className="border rounded-xl p-10 shadow-[rgba(0,_0,_0,_0.25)_0px_25px_50px_-12px] ">
+          {children}
+        </div>
       </div>
     </motion.div>
   );

@@ -6,6 +6,7 @@ import { animate, stagger } from "framer-motion";
 
 import { GET_PRODUCT_DETAIL_ROUTE } from "../utils/constants";
 import Count from "../animations/Count";
+import { Link } from "react-router-dom";
 
 const CartCard = ({ item }) => {
   const { cart, setCart } = useAppStore();
@@ -78,52 +79,36 @@ const CartCard = ({ item }) => {
   if (loading) return <Loader show={loading} />;
 
   return (
-    <section className="border m-3 rounded p-2 min-h-[200px] flex text-2xl justify-evenly items-center">
-      <div className="items-center flex flex-col">
-        <p>{item.name}</p>
-        <button
-          onClick={() => handleRemove(item.id)}
-          className="text-sm text-white border p-1 px-2 rounded bg-black"
-        >
-          Remove From Cart
-        </button>
+    <div
+      className="shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] m-3 rounded p-2 min-h-[200px]    
+        flex flex-col lg:flex-row md:flex-row text-2xl justify-evenly items-center hover:scale-105 transition-all duration-300"
+    >
+      <div>
+        <div className="">
+          <Link to={"/product/" + item.id}>
+            <img
+              width={"100px"}
+              height={"100px"}
+              src={`${item.image}`}
+              alt=""
+            />
+          </Link>
+          <p>{item.name}</p>
+          <button
+            onClick={() => handleRemove(item.id)}
+            className="text-sm w-[100px] text-white border p-1 px-2 rounded bg-black"
+          >
+            <i class="fa-solid fa-trash"></i> Remove
+          </button>
+        </div>
       </div>
-      <div className="ms-3">
-        <button
-          type="button"
-          onClick={() => {
-            if (addToCart > 1) {
-              handleQuantityChange(-1);
-            }
-          }}
-          className="text-white bg-red-500 font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mb-2 hover:bg-red-700 transition-all"
-        >
-          -
-        </button>
-        <input
-          className="w-[50px] p-2 outline-0"
-          type="number"
-          readOnly
-          value={addToCart}
-        />
-        <button
-          type="button"
-          onClick={() => {
-            if (curProduct && addToCart < curProduct.stock) {
-              handleQuantityChange(1);
-            }
-          }}
-          className="text-white bg-red-500 font-medium rounded-lg text-sm px-4 py-2 text-center me-2 mb-2 hover:bg-red-700 transition-all"
-        >
-          +
-        </button>
-      </div>
-      <p>
+      <div>
         <Count end={item.price} time={2} />
-      </p>
-      <Count end={totalPrice} time={2} />
-
-    </section>
+      </div>
+      <div>
+        <Count end={totalPrice} time={2} />
+      </div>
+    </div>
   );
 };
 

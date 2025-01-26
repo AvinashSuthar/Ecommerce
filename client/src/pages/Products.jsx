@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { Pagination } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import Loader from "../components/Loader";
+import ProductSkleton from "../components/skeleton/ProductSkleton";
 
 const Products = () => {
   const { keyword } = useParams();
@@ -89,9 +90,21 @@ const Products = () => {
     setApply(true);
   };
   if (loading) {
-    return <Loader show={loading} />;
+    return (
+      <div>
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 justify-center m-4">
+          <ProductSkleton number={8} />
+          <ProductSkleton number={8} />
+          <ProductSkleton number={8} />
+          <ProductSkleton number={8} />
+          <ProductSkleton number={8} />
+          <ProductSkleton number={8} />
+          <ProductSkleton number={8} />
+          <ProductSkleton number={8} />
+        </div>
+      </div>
+    );
   }
-
 
   return (
     <div>

@@ -31,6 +31,7 @@ import OrderDetails from "./pages/OrderDetails";
 function App() {
   const { userInfo, setUserInfo } = useAppStore();
   const [loading, setLoading] = useState(true);
+  const [show, setShow] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -51,16 +52,12 @@ function App() {
     getUserInfo();
   }, [setUserInfo]);
 
-  if (loading) {
-    return <Loader show={loading} />;
-  }
-
   return (
     <>
       <Header />
 
       <Routes location={location}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home show={show} setShow={setShow} />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/products" element={<Products />} />

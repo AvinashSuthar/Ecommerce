@@ -20,7 +20,11 @@ const Count = ({ end, time }) => {
     return <motion.pre>{rounded}</motion.pre>;
   }
 
-  return <div key={key}>{HTMLContent()}</div>; // Use key to re-render the component
+  return (
+    <div className="flex text-orange-500" key={key}>
+      ₹ {HTMLContent()}
+    </div>
+  ); // Use key to re-render the component
 };
 
 export default Count;

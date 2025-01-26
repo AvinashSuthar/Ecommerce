@@ -4,8 +4,6 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 
-
-
 const CheckoutSteps = ({ step }) => {
   const steps = [
     {
@@ -27,26 +25,28 @@ const CheckoutSteps = ({ step }) => {
   };
 
   return (
-    <Fragment>
-      <Stepper alternativeLabel step={step} style={stepStyles}>
-        {steps.map((item, index) => (
-          <Step
-            key={index}
-            active={step === index ? true : false}
-            completed={step >= index ? true : false}
-          >
-            <StepLabel
-              style={{
-                color: step >= index ? "tomato" : "rgba(0, 0, 0, 0.649)",
-              }}
-              icon={item.icon}
+    <div className="mt-5">
+      <Fragment>
+        <Stepper alternativeLabel step={step} style={stepStyles}>
+          {steps.map((item, index) => (
+            <Step
+              key={index}
+              active={step === index ? true : false}
+              completed={step >= index ? true : false}
             >
-              {item.label}
-            </StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-    </Fragment>
+              <StepLabel
+                style={{
+                  color: step >= index ? "tomato" : "rgba(0, 0, 0, 0.649)",
+                }}
+                icon={item.icon}
+              >
+                {item.label}
+              </StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </Fragment>
+    </div>
   );
 };
 
