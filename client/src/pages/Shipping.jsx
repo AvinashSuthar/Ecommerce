@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppStore } from "../store";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import Box from "../components/Box";
 import { Country, State, City } from "country-state-city";
 import Checkout from "../components/Checkout";
@@ -30,7 +30,7 @@ const Shipping = () => {
   };
   return (
     <div>
-      <CheckoutSteps step={0}/>
+      <CheckoutSteps step={0} />
       <Box>
         <div className="flex flex-col">
           <h1 className="mb-7 text-3xl text-center font-semibold">
@@ -43,6 +43,7 @@ const Shipping = () => {
           <input
             type="address"
             id="address"
+            required
             name="address"
             placeholder="Enter Address"
             value={address}
@@ -58,6 +59,9 @@ const Shipping = () => {
           <input
             type="number"
             id="phone"
+            required
+            min={1111111111}
+            max={9999999999}
             name="phone"
             placeholder="Enter Phone No."
             value={phoneNo}
@@ -71,6 +75,7 @@ const Shipping = () => {
           </label>
           <input
             type="number"
+            required
             id="pincode"
             name="pincode"
             placeholder="Enter Pincode"
@@ -88,6 +93,7 @@ const Shipping = () => {
             onChange={(e) => setcontry(e.target.value)}
             className="border my-2 py-2 w-full rounded"
             value={contry}
+            required
             id="contry"
           >
             {Country.getAllCountries().map((c) => (
@@ -105,6 +111,7 @@ const Shipping = () => {
             <select
               className="border my-2 py-2 w-full rounded"
               name="state"
+              required
               id="state"
               value={state}
               onChange={(e) => setstate(e.target.value)}
@@ -125,6 +132,7 @@ const Shipping = () => {
             <select
               className="border my-2 py-2 w-full rounded"
               name="city"
+              required
               id="city"
               value={city}
               onChange={(e) => setcity(e.target.value)}

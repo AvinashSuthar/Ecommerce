@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 
 const corsOptions = {
-  origin: "https://bazarbolt-avinashsuthar.netlify.app", // Frontend URL
+  origin: "https://ecommerce-seven-vert.vercel.app", // Frontend URL
   credentials: true, // Allow cookies or Authorization headers
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers

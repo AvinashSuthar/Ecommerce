@@ -44,12 +44,14 @@ const Payment = () => {
         });
         if (res.data.success) {
           toast.success("Order Created Successfully!");
+          navigate("/order/details");
         }
       } catch (error) {
         console.log(error);
+        toast.error("Something went wrong");
       }
     } else {
-      navigate("/order/details");
+      toast.error("Something went wrong");
     }
   };
 
@@ -75,7 +77,7 @@ const Payment = () => {
 
   return (
     <div>
-        <Checkout step={2} />
+      <Checkout step={2} />
       <div className="p-6 mt-10 max-w-md mx-auto border rounded-lg shadow-lg">
         <h2 className="text-2xl font-semibold mb-4">Payment Details</h2>
         <p>
