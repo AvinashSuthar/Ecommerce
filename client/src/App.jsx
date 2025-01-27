@@ -50,7 +50,7 @@ function App() {
     };
 
     getUserInfo();
-  }, [setUserInfo]);
+  }, []);
 
   return (
     <>
