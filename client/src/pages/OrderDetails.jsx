@@ -25,15 +25,25 @@ const OrderDetails = () => {
       } finally {
         setLoading(false);
       }
-      getSingleOrder();
     };
-  }, [order]);
+    getSingleOrder();
+  }, []);
 
   if (loading) {
     return <Loader show={loading} />;
   }
 
-  return <div>{id}</div>;
+  return (
+    <div>
+      <div>{JSON.stringify(order)}</div>
+      <div>
+        <div className="flex">
+          <div>Order ID :</div>
+          <div>{order._id}</div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default OrderDetails;

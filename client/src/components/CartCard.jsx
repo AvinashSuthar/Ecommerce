@@ -98,14 +98,18 @@ const CartCard = ({ item }) => {
             onClick={() => handleRemove(item.id)}
             className="text-sm w-[100px] text-white border p-1 px-2 rounded bg-black"
           >
-            <i class="fa-solid fa-trash"></i> Remove
+            <i className="fa-solid fa-trash"></i> Remove
           </button>
         </div>
       </div>
-      <div>
+      <div className="flex">
         <Count end={item.price} time={2} />
+        <div className="text-orange-500"> &nbsp; X &nbsp; </div>
+        <div className="text-orange-500">{item.quantity}</div>
       </div>
-      <div>
+      <div className="flex">
+        <div className="text-orange-500"> &nbsp; = &nbsp; </div>
+
         <Count end={totalPrice} time={2} />
       </div>
     </div>
