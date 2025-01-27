@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GET_ALL_PRODUCT_ROUTE } from "../utils/constants";
 import { useAppStore } from "../store";
 import axios from "axios";
-import ProductCard from "../components/productCard";
+import ProductCard from "../components/ProductCard";
 import { useParams } from "react-router-dom";
 import { Pagination } from "@mui/material";
 import Slider from "@mui/material/Slider";

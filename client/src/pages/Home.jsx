@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GET_ALL_PRODUCT_ROUTE } from "../utils/constants";
 import { useAppStore } from "../store";
 import axios from "axios";
-import ProductCard from "../components/productCard";
+import ProductCard from "../components/ProductCard";
 import Loader from "../components/Loader";
 import ProductSkleton from "../components/skeleton/ProductSkleton";
 import Welcome from "../components/Welcome";
