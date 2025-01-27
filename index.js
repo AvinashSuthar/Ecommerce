@@ -27,14 +27,15 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      callback(null, origin || "*");
-    },
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: "https://bazarbolt-avinashsuthar.netlify.app", // Frontend URL
+  credentials: true, // Allow cookies or Authorization headers
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+};
+
+app.use(cors(corsOptions));
+
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,

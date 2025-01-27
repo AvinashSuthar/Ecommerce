@@ -40,6 +40,7 @@ function App() {
         const res = await axios.get(GET_USER_INFO, {
           withCredentials: true,
         });
+        
         setUserInfo(res.data.user);
       } catch (error) {
         console.log("Error fetching user info:", error);
